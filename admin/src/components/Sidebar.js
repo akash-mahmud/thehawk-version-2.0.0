@@ -94,12 +94,20 @@ const auth = useAuth()
                 <Link className="nav-link" to="/admin/all_media">
                   <i className="mdi mdi-grid-large menu-icon"></i>
                   <span className="menu-title">
-                    All Media{" "}
+                    All Media
                     <PermMediaIcon style={{ "margin-left": "10px" }} />
                   </span>
                 </Link>
               </li>
-
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin/all_category">
+                  <i className="mdi mdi-grid-large menu-icon"></i>
+                  <span className="menu-title">
+                    All Category
+                    <PermMediaIcon style={{ "margin-left": "10px" }} />
+                  </span>
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/admin/add_user">
                   <i className="mdi mdi-grid-large menu-icon"></i>
