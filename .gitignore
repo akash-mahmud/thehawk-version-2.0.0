@@ -1,0 +1,6 @@
+/node_modules
+/star-admin2-free-admin-template
+.env
+private.key
+bundle.crt
+thehawk.gzip

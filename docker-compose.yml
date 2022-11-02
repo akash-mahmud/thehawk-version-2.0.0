@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest # use the latest image.
+    container_name: mongodb
+    restart: unless-stopped
+    environment: # set required env variables to access mongo
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    ports:
+      - 27017:27017
+    volumes: # optional to preserve database after container is deleted.
+      - ./database-data:/data/db
+  
+  # Mongo Express Service
+  mongo-express:
+    image: mongo-express:latest # latest image
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongodb 
+      # use the name of the mongo container above for server env var.
+      # In our case this is mongodb
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: "./"
+    volumes:
+      - /app/node_modules
+      - ./app
+    environment:
+      - MONGODB_URI=mongodb+srv://akashmahmud:01313545778@cluster0.vsasr.mongodb.net/?retryWrites=true&w=majority
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+     
+  admin:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./admin
+    volumes:
+      - /app/node_modules
+      - ./admin:/app
+
+
