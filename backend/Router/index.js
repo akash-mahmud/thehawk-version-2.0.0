@@ -24,6 +24,9 @@ import {register,login ,users ,editUser,me ,logout,userDelete, adminregister, re
 import authenticate  from "../Middleware/authenticate.js";
 import { backUpDownload, restoreBackUp } from "../Controller/backupAndRestoreController.js";
 import auth from "../Middleware/auth.js";
+import { createPool, getCurrentPool } from "../Controller/pool.js";
+import { createSiteInfo, getSiteInfo, updateSiteInfo } from "../Controller/siteinfo.js";
+import { sendEmail } from "../Controller/email.js";
 const passportLocal = require("../Middleware/pasportLocal");
 
 const router = express.Router();
@@ -31,6 +34,8 @@ const router = express.Router();
 //Post Routes
 router.post("/api/user/register", register);
 router.post("/api/refresh", refresh);
+router.post("/api/pool", createPool);
+router.post("/api/siteinfo", createSiteInfo);
 router.post('/api/user/admin/register', adminregister);
 router.post("/user",passportLocal.authenticate('local') ,login);
 // router.get("/user" , auth ,user);
@@ -42,6 +47,7 @@ router.post('/api/restore/download', backUpDownload);
 router.post('/api/category', addCategory);
 router.post('/api/category/seed', migrateData);
 router.post('/api/subCategory', addSubCategory);
+router.post("/api/email", sendEmail);
 
 router.post('/api/rss_feed', addRss);
 
@@ -49,6 +55,8 @@ router.post('/api/rss_feed', addRss);
 // router.get('/api/logout', logout);
 // router.get('/api/media', searchForMedia);
 router.get('/api/user/me', auth, user);
+router.get("/api/pool", getCurrentPool);
+router.get("/api/siteinfo", getSiteInfo);
 router.get('/api/user/me/logout', auth, logout);
 router.get('/api/user', users);
 router.get('/api/category', getCategory);
@@ -69,6 +77,7 @@ router.get('/api/rss/:id', getRss);
 
 //Pathch Routes
 router.patch('/api/post/:id', editPost);
+router.patch("/api/siteinfo", updateSiteInfo);
 router.patch("/api/user/:id",editUser);
 router.patch("/api/category/:id", editCategory);
 router.patch("/api/subCategory/:id", editSubCategory);

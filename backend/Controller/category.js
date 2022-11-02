@@ -16,6 +16,7 @@ const addCategory = expressAsyncHandler(async (req, res) => {
     }
   }
   const category = new Category({
+    position: req.body.position,
     category: req.body.title.trim(),
     categoryPageTitle: req.body.pageTitle,
     categoryPageKeyWords: req.body.pageKeywords,
@@ -64,6 +65,7 @@ const editCategory = async (req, res) => {
     // }
 
     const updatedCategory = {
+      position: req.body.position,
       category: req.body.title.trim(),
       categoryPageTitle: req.body.pageTitle,
       categoryPageKeyWords: req.body.pageKeywords,

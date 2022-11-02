@@ -24,7 +24,7 @@ function UpdateCategoryScreen() {
   const [pageKeywords, setPageKeywords] = useState('');
   const [image, setImage] = useState('');
   const [addTop, setaddTop] = useState(false);
-
+  const [position, setposition] = useState();
   const [addToMenu, setAddToMenu] = useState(false);
   const [blueSection, setBlueSection] = useState();
   const [isGridSection, setIsGridSection] = useState();
@@ -43,6 +43,7 @@ function UpdateCategoryScreen() {
       });
     const data = upDateAblePost && upDateAblePost[0];
     setTitle(data && data.category);
+    setposition(data && data.position);
     setText(data && data.categoryText);
     setImage(data && data.categoryImg);
     setaddTop(data && data.addTop);
@@ -62,6 +63,7 @@ function UpdateCategoryScreen() {
   const categoryDataSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.patch(`/api/category/${id.id}`, {
+      position,
       title,
       text,
       image,
@@ -77,19 +79,7 @@ function UpdateCategoryScreen() {
       pageKeywords,
     });
     if (res.status === 200) {
-      setTitle('');
-      setText('');
-      setImage('');
-      setaddTop(false);
-      setAddToMenu(false);
-      setBlueSection(false);
-      setIsGridSection(false);
-      setAddToComminSection(false);
-      setIsPlainSection(false);
-      setGridWithWizard(false);
-      setIsVideoSection(false);
-      setPageTitle('');
-      setPageKeywords('');
+
       navigate('/admin/all_category');
     }
   };
@@ -137,6 +127,20 @@ function UpdateCategoryScreen() {
                           </div>
                           <div class="form-group">
                             <label for="exampleFormControlFile1">
+                              Position on Menu
+                            </label>
+                            <input
+                              class="form-control"
+                              type="number"
+                              placeholder="enter page title"
+                              onChange={(e) =>
+                                setposition(parseInt(e.target.value))
+                              }
+                              value={position}
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleFormControlFile1">
                               Page keywords
                             </label>
                             <input
@@ -164,9 +168,9 @@ function UpdateCategoryScreen() {
                             <label htmlFor="isfetaured">Add to menu</label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isfetaured"
                               type="checkbox"
@@ -181,9 +185,9 @@ function UpdateCategoryScreen() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -200,9 +204,9 @@ function UpdateCategoryScreen() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -218,9 +222,9 @@ function UpdateCategoryScreen() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -237,9 +241,9 @@ function UpdateCategoryScreen() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -255,9 +259,9 @@ function UpdateCategoryScreen() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -274,9 +278,9 @@ function UpdateCategoryScreen() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isRight"
                               type="checkbox"
@@ -288,7 +292,7 @@ function UpdateCategoryScreen() {
                             type="submit"
                             class="btn btn-primary me-2"
                             onClick={categoryDataSubmit}
-                            style={{ width: '13%' }}
+                            style={{ width: "13%" }}
                           >
                             update
                           </button>

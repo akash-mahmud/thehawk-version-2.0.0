@@ -12,8 +12,10 @@ function AddCategory() {
   const [text, setText] = useState('');
   const [pageTitle, setPageTitle] = useState('');
   const [pageKeywords, setPageKeywords] = useState('');
-
+    // position: req.body.position,
+  
   const [addTop, setaddTop] = useState(false);
+  const [position, setposition] = useState();
   const [adPostLoad, setadPostLoad] = useState(false);
 
   const [addToMenu, setAddToMenu] = useState(false);
@@ -30,7 +32,7 @@ function AddCategory() {
     const res = await axios.post('/api/category', {
       title,
       text,
-
+position,
       addTop,
       addToMenu,
       blueSection,
@@ -46,7 +48,7 @@ function AddCategory() {
         setadPostLoad(false);
       setTitle('');
       setText('');
-
+      setposition();
       setaddTop(false);
       setAddToMenu(false);
       setBlueSection(false);
@@ -104,6 +106,18 @@ function AddCategory() {
                           </div>
                           <div class="form-group">
                             <label for="exampleFormControlFile1">
+                              Position on Menu
+                            </label>
+                            <input
+                              class="form-control"
+                              type="number"
+                              placeholder="enter page title"
+                              onChange={(e) => setposition(parseInt(e.target.value))}
+                              value={position}
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleFormControlFile1">
                               Page keywords
                             </label>
                             <input
@@ -131,9 +145,9 @@ function AddCategory() {
                             <label htmlFor="isfetaured">Add to menu</label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isfetaured"
                               type="checkbox"
@@ -148,9 +162,9 @@ function AddCategory() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -167,9 +181,9 @@ function AddCategory() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -185,9 +199,9 @@ function AddCategory() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -204,9 +218,9 @@ function AddCategory() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -222,9 +236,9 @@ function AddCategory() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isTopfetaured"
                               type="checkbox"
@@ -241,9 +255,9 @@ function AddCategory() {
                             </label>
                             <input
                               style={{
-                                height: '28px',
-                                width: '18px',
-                                display: 'block',
+                                height: "28px",
+                                width: "18px",
+                                display: "block",
                               }}
                               id="isRight"
                               type="checkbox"
@@ -255,7 +269,7 @@ function AddCategory() {
                             type="submit"
                             class="btn btn-primary me-2"
                             onClick={categoryDataSubmit}
-                            style={{ width: '13%' }}
+                            style={{ width: "13%" }}
                             disabled={adPostLoad}
                           >
                             Add
