@@ -16,6 +16,7 @@ import schedule from "node-schedule";
 import { backupMongoDB } from "./backend/backup/index.js";
 import expressSession from 'express-session'
 import passport from 'passport'
+import Subscriber from "./backend/Model/subscriber.js";
 const fileUpload = require("express-fileupload");
 
 const app = express();
@@ -95,9 +96,27 @@ app.listen(port, () => {
 
 // backup database every day at 3AM
 schedule.scheduleJob("0 3 * * *", async () => {
-  console.log("Backup  cron started");
+  try {
+      console.log("Backup  cron started");
 
-  backupMongoDB();
+      backupMongoDB();
 
-  console.log("backup cron completed");
+    
+      console.log("backup cron completed");
+  } catch (error) {
+    
+  }
+
 });
+
+
+// schedule.scheduleJob("11 * * *", async () => {
+//   try {
+//     console.log("susbcribe email  cron started");
+
+//     const subscribers = await Subscriber.find({}, {_id:0, createdAt:0, updatedAt:0});
+
+//     console.log("backup cron completed");
+//   } catch (error) {}
+// });
+
