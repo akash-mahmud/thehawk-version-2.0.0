@@ -12,6 +12,7 @@ import {
   user,
 } from "../Controller/UserController.js";
 const passportLocal = require("../Middleware/pasportLocal");
+const auth = require('../Middleware/auth')
 const userRouter = express.Router();
 userRouter.post("/admin/register", adminregister);
 userRouter.post("/", passportLocal.authenticate("local"), login);

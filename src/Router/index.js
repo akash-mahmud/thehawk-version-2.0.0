@@ -28,6 +28,7 @@ import userRouter from "./user.js";
 import postRouter from "./post.js";
 import categoryRouter from "./category.js";
 import subCategoryRouter from "./subcategory.js";
+import mediaRouter from "./media.js";
 const passportLocal = require("../Middleware/pasportLocal");
 
 const router = express.Router();
@@ -36,6 +37,7 @@ router.use("/user", userRouter);
 router.use("/post", postRouter);
 router.use("/category", categoryRouter);
 router.use("/subCategory", subCategoryRouter);
+router.use("/media", mediaRouter);
 
 //Post Routes
 
@@ -46,7 +48,7 @@ router.post("/siteinfo", createSiteInfo);
 // router.get("/user" , auth ,user);
 
 router.post("/subscribe", subscribe);
-router.post("/media", findMedia);
+
 router.post("/restore/backup", restoreBackUp);
 router.post("/restore/download", backUpDownload);
 

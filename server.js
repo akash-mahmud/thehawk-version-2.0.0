@@ -17,9 +17,11 @@ import { backupMongoDB } from "./src/backup/index.js";
 import expressSession from 'express-session'
 import passport from 'passport'
 import Subscriber from "./src/Model/subscriber.js";
-const fileUpload = require("express-fileupload");
+
 
 const app = express();
+
+//middlewares
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
@@ -28,7 +30,7 @@ app.use(morgan("dev"));
 dotenv.config();
 app.use(cookieParser());
 app.use(compression());
-app.use(fileUpload());
+
 //Database
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded());
