@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Node.js CD
+name: Thehawk server CD
 
 # Controls when the action will run. 
 on:
@@ -24,10 +24,8 @@ jobs:
         key: ${{ secrets.KEY }}
         username: ${{ secrets.USERNAME }}
         # password: ${{ secrets.PASSWORD }}
-        port: 7822
+        port: 22
         script: |
-          cd ..
-          cd home
           cd thehawk-server
           sudo git pull origin master
           sudo git status
