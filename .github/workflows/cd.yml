@@ -29,5 +29,5 @@ jobs:
           cd thehawk-server
           sudo git pull origin master
           sudo git status
-          sudo yarn install --only=prod
+          sudo pnpm install --only=prod
           pm2 restart thehawk-server
